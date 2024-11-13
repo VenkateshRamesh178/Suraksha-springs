@@ -1,25 +1,38 @@
-import logo from './logo.svg';
+import React, { useState, useRef } from 'react';
+import Navbar from './components/Navbar';
+import Hero from './components/Hero';
+import About from './components/About';
+import Amenities from './components/Amenities';
+import Slideshow from './components/Slideshow';
+import Footer from './components/Footer';
+import PopupForm from './components/PopupForm';
 import './App.css';
 
-function App() {
+const App = () => {
+  const [isPopupOpen, setPopupOpen] = useState(false);
+  const sections = {
+    home: useRef(null),
+    about: useRef(null),
+    amenities: useRef(null),
+    gallery: useRef(null),
+  };
+
+  const scrollToSection = (section) => {
+    sections[section].current.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Navbar scrollToSection={scrollToSection} openPopup={() => setPopupOpen(true)} />
+      <Hero />
+      <div ref={sections.about}><About /></div>
+      <div ref={sections.amenities}><Amenities /></div>
+      {/* <div ref={sections.gallery}><Gallery /></div> */}
+      <Slideshow />
+      <Footer />
+      <PopupForm isOpen={isPopupOpen} closePopup={() => setPopupOpen(false)} />
     </div>
   );
-}
+};
 
 export default App;
