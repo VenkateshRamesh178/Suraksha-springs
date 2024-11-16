@@ -21,7 +21,7 @@ const Navbar = ({ openPopup }) => {
         {/* Call Us Button */}
         <li>
           <a href="tel:+91 8310933745" className="call-btn">
-            Call Us
+            Call: 8310933745
           </a>
         </li>
       </ul>

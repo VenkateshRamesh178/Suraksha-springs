@@ -1,9 +1,8 @@
-// src/components/PopupForm.js
 import React, { useState, useEffect } from 'react';
 import emailjs from 'emailjs-com';
 import './PopupForm.css';
 
-const PopupForm = ({ isOpen, closePopup }) => {
+const PopupForm = ({ isOpen, closePopup, heading, submitButtonText }) => {
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
@@ -33,17 +32,13 @@ const PopupForm = ({ isOpen, closePopup }) => {
     emailjs
       .send(
         'service_igdnsep', // Replace with your emailjs service ID
-        'template_v6m8rmz', // Replace with your emailjs template ID
+        'template_b4pp1na', // Replace with your emailjs template ID
         formData,
         'SBc31N7WNNF4OzX9g' // Replace with your emailjs user ID
       )
       .then((response) => {
         console.log('Email sent successfully:', response);
-        
-        // Alert the user on successful submission
         alert('Thank you for contacting us! Your message has been sent successfully.');
-        
-        // Reset the form fields after submission
         setFormData({ name: '', phone: '', email: '' });
       })
       .catch((error) => {
@@ -68,7 +63,7 @@ const PopupForm = ({ isOpen, closePopup }) => {
         <button className="close-btn" onClick={handleClosePopup}>
           &times;
         </button>
-        <h2>Contact Us</h2>
+        <h2>{heading}</h2>
         <form onSubmit={handleSubmit}>
           <input
             type="text"
@@ -94,7 +89,7 @@ const PopupForm = ({ isOpen, closePopup }) => {
             onChange={handleChange}
           />
           <button type="submit" className="submit-btn">
-            Submit
+            {submitButtonText}
           </button>
         </form>
       </div>

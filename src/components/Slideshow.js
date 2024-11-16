@@ -27,7 +27,6 @@ const Slideshow = () => {
   return (
     <section id="gallery" className="slideshow-container">
       <div className="slideshow">
-        <h1>Gallery</h1>
         {images.map((image, index) => (
           <div
             key={index}
